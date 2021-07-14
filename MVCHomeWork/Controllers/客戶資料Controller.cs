@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCHomeWork.Models;
+using MVCHomeWork.ViewModels;
+using Omu.ValueInjecter;
 
 namespace MVCHomeWork.Controllers
 {
@@ -14,10 +16,16 @@ namespace MVCHomeWork.Controllers
     {
         private 客戶資料Entities db = new 客戶資料Entities();
 
-        // GET: 客戶資料
-        public ActionResult Index()
+        // GET: 客戶資料　
+        public ActionResult Index(string searchString)
         {
-            return View(db.客戶資料.ToList());
+            var 客戶資料 = from m in db.客戶資料
+                         select m;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                客戶資料 = 客戶資料.Where(s => s.客戶名稱.Contains(searchString));
+            }
+            return View(客戶資料);
         }
 
         // GET: 客戶資料/Details/5
@@ -46,16 +54,19 @@ namespace MVCHomeWork.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料 客戶資料)
+        public ActionResult Create([Bind(Include = "Id,客戶名稱,統一編號,電話,傳真,地址,Email")] 客戶資料CreateViewModel 客戶資料Input)
         {
             if (ModelState.IsValid)
             {
+                客戶資料 客戶資料 = new 客戶資料();
+                客戶資料.InjectFrom(客戶資料Input);
+
                 db.客戶資料.Add(客戶資料);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(客戶資料);
+            return View(客戶資料Input);
         }
 
         // GET: 客戶資料/Edit/5

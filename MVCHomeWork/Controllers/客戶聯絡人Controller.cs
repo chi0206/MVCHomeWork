@@ -15,9 +15,13 @@ namespace MVCHomeWork.Controllers
         private 客戶資料Entities db = new 客戶資料Entities();
 
         // GET: 客戶聯絡人
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                客戶聯絡人 = 客戶聯絡人.Where(s => s.姓名.Contains(searchString));
+            }
             return View(客戶聯絡人.ToList());
         }
 

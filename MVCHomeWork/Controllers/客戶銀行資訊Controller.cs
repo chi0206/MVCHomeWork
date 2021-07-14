@@ -15,9 +15,13 @@ namespace MVCHomeWork.Controllers
         private 客戶資料Entities db = new 客戶資料Entities();
 
         // GET: 客戶銀行資訊
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                客戶銀行資訊 = 客戶銀行資訊.Where(s => s.銀行名稱.Contains(searchString));
+            }
             return View(客戶銀行資訊.ToList());
         }
 
