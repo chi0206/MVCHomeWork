@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MVCHomeWork.ViewModels
+namespace MVCHomeWork.ViewModels.客戶資料
 {
     public class 客戶資料CreateViewModel
     {

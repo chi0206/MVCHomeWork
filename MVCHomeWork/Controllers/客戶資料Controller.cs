@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCHomeWork.Models;
-using MVCHomeWork.ViewModels;
+using MVCHomeWork.ViewModels.客戶資料;
 using Omu.ValueInjecter;
 
 namespace MVCHomeWork.Controllers

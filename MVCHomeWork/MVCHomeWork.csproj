@@ -134,6 +134,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\客戶聯絡人Controller.cs" />
     <Compile Include="Controllers\客戶資料Controller.cs" />
+    <Compile Include="Controllers\客戶資料對照表Controller.cs" />
     <Compile Include="Controllers\客戶銀行資訊Controller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -163,6 +164,9 @@
     <Compile Include="Models\客戶資料1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>客戶資料.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\客戶資料對照表.cs">
       <DependentUpon>客戶資料.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\客戶銀行資訊.cs">
@@ -244,6 +248,8 @@
     <Content Include="Views\客戶銀行資訊\Details.cshtml" />
     <Content Include="Views\客戶銀行資訊\Edit.cshtml" />
     <Content Include="Views\客戶銀行資訊\Index.cshtml" />
+    <Content Include="Views\客戶資料對照表\Details.cshtml" />
+    <Content Include="Views\客戶資料對照表\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

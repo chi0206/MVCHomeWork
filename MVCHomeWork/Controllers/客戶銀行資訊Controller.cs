@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCHomeWork.Models;
+using Omu.ValueInjecter;
 
 namespace MVCHomeWork.Controllers
 {
@@ -52,17 +53,21 @@ namespace MVCHomeWork.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,客戶Id,銀行名稱,銀行代碼,分行代碼,帳戶名稱,帳戶號碼")] 客戶銀行資訊 客戶銀行資訊)
+        public ActionResult Create([Bind(Include = "Id,客戶Id,銀行名稱,銀行代碼,分行代碼,帳戶名稱,帳戶號碼")] 客戶銀行資訊 客戶銀行資訊Input)
         {
+            客戶銀行資訊 客戶銀行資訊 = new 客戶銀行資訊();
+
             if (ModelState.IsValid)
             {
+                客戶銀行資訊.InjectFrom(客戶銀行資訊Input);
+
                 db.客戶銀行資訊.Add(客戶銀行資訊);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.客戶Id = new SelectList(db.客戶資料, "Id", "客戶名稱", 客戶銀行資訊.客戶Id);
-            return View(客戶銀行資訊);
+            return View(客戶銀行資訊Input);
         }
 
         // GET: 客戶銀行資訊/Edit/5

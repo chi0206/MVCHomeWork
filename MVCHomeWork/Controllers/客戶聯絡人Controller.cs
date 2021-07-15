@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCHomeWork.Models;
+using MVCHomeWork.ViewModels.客戶聯絡人;
+using Omu.ValueInjecter;
+
 
 namespace MVCHomeWork.Controllers
 {
@@ -52,17 +55,22 @@ namespace MVCHomeWork.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,客戶Id,職稱,姓名,Email,手機,電話")] 客戶聯絡人 客戶聯絡人)
+        public ActionResult Create([Bind(Include = "Id,客戶Id,職稱,姓名,Email,手機,電話")] 客戶聯絡人CreateViewModel 客戶聯絡人Input)
         {
+            客戶聯絡人 客戶聯絡人 = new 客戶聯絡人();
+
             if (ModelState.IsValid)
             {
+                客戶聯絡人.InjectFrom(客戶聯絡人Input);
+
                 db.客戶聯絡人.Add(客戶聯絡人);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.客戶Id = new SelectList(db.客戶資料, "Id", "客戶名稱", 客戶聯絡人.客戶Id);
-            return View(客戶聯絡人);
+
+            return View(客戶聯絡人Input);
         }
 
         // GET: 客戶聯絡人/Edit/5
