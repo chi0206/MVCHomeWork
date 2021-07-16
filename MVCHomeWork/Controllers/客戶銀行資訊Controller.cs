@@ -22,7 +22,10 @@ namespace MVCHomeWork.Controllers
             var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料);
             if (!String.IsNullOrEmpty(searchString))
             {
-                客戶銀行資訊 = 客戶銀行資訊.Where(s => s.銀行名稱.Contains(searchString));
+                客戶銀行資訊 = 客戶銀行資訊.Where(p => p.銀行名稱.Contains(searchString)
+                            || searchString.Equals(p.分行代碼.ToString()) || p.帳戶號碼.Contains(searchString)
+                            || p.客戶資料.客戶名稱.Contains(searchString) || p.帳戶名稱.Contains(searchString)
+                            || searchString.Equals(p.銀行代碼.ToString()));
             }
             return View(客戶銀行資訊.ToList());
         }
