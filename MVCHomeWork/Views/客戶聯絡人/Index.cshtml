@@ -12,28 +12,35 @@
 @using (Html.BeginForm())
 {
     <p class="form-inline">
-        <label>姓名：</label>@Html.TextBox("searchString") &ensp; <input type="submit" value="搜尋" class="btn btn-sm btn-info" />
+        <label>關鍵字：</label>@Html.TextBox("searchString") &ensp;
+        <input type="submit" value="搜尋" class="btn btn-sm btn-info" />
     </p>
 }
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.職稱)
+            @*@Html.DisplayNameFor(model => model.職稱)*@
+            @Html.ActionLink("職稱", "Index", new { sortOrder = ViewBag.職稱Sort, searchString = ViewBag.searchString })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.姓名)
+            @*@Html.DisplayNameFor(model => model.姓名)*@
+            @Html.ActionLink("姓名", "Index", new { sortOrder = ViewBag.姓名Sort, searchString = ViewBag.searchString })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @*@Html.DisplayNameFor(model => model.Email)*@
+            @Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.EmailSort, searchString = ViewBag.searchString })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.手機)
+            @*@Html.DisplayNameFor(model => model.手機)*@
+            @Html.ActionLink("手機", "Index", new { sortOrder = ViewBag.手機Sort, searchString = ViewBag.searchString })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.電話)
+            @*@Html.DisplayNameFor(model => model.電話)*@
+            @Html.ActionLink("電話", "Index", new { sortOrder = ViewBag.電話Sort, searchString = ViewBag.searchString })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.客戶資料.客戶名稱)
+            @*@Html.DisplayNameFor(model => model.客戶資料.客戶名稱)*@
+            @Html.ActionLink("客戶名稱", "Index", new { sortOrder = ViewBag.客戶名稱Sort, searchString = ViewBag.searchString })
         </th>
         <th></th>
     </tr>

@@ -8,6 +8,7 @@ namespace MVCHomeWork.ViewModels.客戶聯絡人
 {
     public class 客戶聯絡人EditViewModel
     {
+        public int Id { get; set; }
         [Required]
         public int 客戶Id { get; set; }
         [Required]

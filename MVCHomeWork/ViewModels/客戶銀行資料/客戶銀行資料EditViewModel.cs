@@ -8,6 +8,7 @@ namespace MVCHomeWork.ViewModels.客戶銀行資料
 {
     public class 客戶銀行資料EditViewModel
     {
+        public int Id { get; set; }
         [Required]
         public int 客戶Id { get; set; }
         [Required]
