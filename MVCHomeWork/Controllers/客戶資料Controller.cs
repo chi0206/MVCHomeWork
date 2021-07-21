@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCHomeWork.Models;
+using MVCHomeWork.ViewModels;
 using MVCHomeWork.ViewModels.客戶資料;
 using Omu.ValueInjecter;
 
@@ -15,54 +16,18 @@ namespace MVCHomeWork.Controllers
     public class 客戶資料Controller : Controller
     {
         private 客戶資料Entities db = new 客戶資料Entities();
-
+        客戶資料Repository repo = RepositoryHelper.Get客戶資料Repository();
         // GET: 客戶資料　
-        public ActionResult Index(string searchString , string sortOrder)
+        public ActionResult Index(客戶資料Filter filter)
         {
-            ViewBag.searchString = string.IsNullOrEmpty(searchString) ? "" : searchString;
-            ViewBag.客戶名稱Sort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.統一編號Sort = string.IsNullOrEmpty(sortOrder) ? "uniNum_desc" : "";
-            ViewBag.電話Sort = string.IsNullOrEmpty(sortOrder) ? "phone_desc" : "";
-            ViewBag.傳真Sort = string.IsNullOrEmpty(sortOrder) ? "fax_desc" : "";
-            ViewBag.地址Sort = string.IsNullOrEmpty(sortOrder) ? "address_desc" : "";
-            ViewBag.EmailSort = string.IsNullOrEmpty(sortOrder) ? "email_desc" : "";
-
-            var 客戶資料 = from m in db.客戶資料
-                           where m.是否已刪除 == false
-                           select m;
-            if (!String.IsNullOrEmpty(searchString))
+            if (!ModelState.IsValid)
             {
-                客戶資料 = 客戶資料.Where(p => p.客戶名稱.Contains(searchString)
-                            || p.統一編號.Contains(searchString) || p.電話.Contains(searchString)
-                            || p.傳真.Contains(searchString) || p.地址.Contains(searchString)
-                            || p.Email.Contains(searchString));
+                ViewData.Model = new List<客戶資料>();
+                return View();
             }
 
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    客戶資料 = 客戶資料.OrderByDescending(客 => 客.客戶名稱);
-                    break;
-                case "uniNum_desc":
-                    客戶資料 = 客戶資料.OrderByDescending(客 => 客.統一編號);
-                    break;
-                case "phone_desc":
-                    客戶資料 = 客戶資料.OrderByDescending(客 => 客.電話);
-                    break;
-                case "fax_desc":
-                    客戶資料 = 客戶資料.OrderByDescending(客 => 客.傳真);
-                    break;
-                case "address_desc":
-                    客戶資料 = 客戶資料.OrderByDescending(客 => 客.地址);
-                    break;
-                case "email_desc":
-                    客戶資料 = 客戶資料.OrderByDescending(客 => 客.Email);
-                    break;
-                default:
-                    客戶資料 = 客戶資料.OrderBy(客 => 客.客戶名稱);
-                    break;
-            }
-            return View(客戶資料);
+            ViewData.Model = repo.Search(filter);
+            return View();
         }
 
         // GET: 客戶資料/Details/5
