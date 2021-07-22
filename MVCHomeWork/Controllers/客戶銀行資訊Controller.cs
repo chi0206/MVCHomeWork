@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCHomeWork.Models;
+using MVCHomeWork.ViewModels;
 using MVCHomeWork.ViewModels.客戶銀行資料;
 using Omu.ValueInjecter;
 
@@ -15,19 +16,19 @@ namespace MVCHomeWork.Controllers
     public class 客戶銀行資訊Controller : Controller
     {
         private 客戶資料Entities db = new 客戶資料Entities();
+        客戶銀行資訊Repository repo = RepositoryHelper.Get客戶銀行資訊Repository();
 
         // GET: 客戶銀行資訊
-        public ActionResult Index(string searchString)
+        public ActionResult Index(客戶銀行資訊Filter filter)
         {
-            var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料);
-            if (!String.IsNullOrEmpty(searchString))
+            if (!ModelState.IsValid)
             {
-                客戶銀行資訊 = 客戶銀行資訊.Where(p => p.銀行名稱.Contains(searchString)
-                            || searchString.Equals(p.分行代碼.ToString()) || p.帳戶號碼.Contains(searchString)
-                            || p.客戶資料.客戶名稱.Contains(searchString) || p.帳戶名稱.Contains(searchString)
-                            || searchString.Equals(p.銀行代碼.ToString()));
+                ViewData.Model = new List<客戶資料>();
+                return View();
             }
-            return View(客戶銀行資訊.ToList());
+
+            ViewData.Model = repo.Search(filter);
+            return View();
         }
 
         // GET: 客戶銀行資訊/Details/5

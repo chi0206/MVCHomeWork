@@ -12,35 +12,76 @@
 @using (Html.BeginForm())
 {
     <p class="form-inline">
-        <label>關鍵字：</label>@Html.TextBox("searchString") &ensp;
-        <input type="submit" value="搜尋" class="btn btn-sm btn-info" />
+        <label>關鍵字：</label>@Html.TextBox("keyword")
     </p>
 }
 <table class="table">
     <tr>
         <th>
-            @*@Html.DisplayNameFor(model => model.職稱)*@
-            @Html.ActionLink("職稱", "Index", new { sortOrder = ViewBag.職稱Sort, searchString = ViewBag.searchString })
+            <a href="@Url.Action("Index", new {
+                    sortBy = "職稱",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
+            @Html.DisplayNameFor(model => model.職稱)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "職稱",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.姓名)*@
-            @Html.ActionLink("姓名", "Index", new { sortOrder = ViewBag.姓名Sort, searchString = ViewBag.searchString })
+            <a href="@Url.Action("Index", new {
+                    sortBy = "姓名",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
+            @Html.DisplayNameFor(model => model.姓名)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "姓名",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.Email)*@
-            @Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.EmailSort, searchString = ViewBag.searchString })
+            <a href="@Url.Action("Index", new {
+                    sortBy = "Email",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
+            @Html.DisplayNameFor(model => model.Email)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "Email",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.手機)*@
-            @Html.ActionLink("手機", "Index", new { sortOrder = ViewBag.手機Sort, searchString = ViewBag.searchString })
+            <a href="@Url.Action("Index", new {
+                    sortBy = "手機",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
+            @Html.DisplayNameFor(model => model.手機)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "手機",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.電話)*@
-            @Html.ActionLink("電話", "Index", new { sortOrder = ViewBag.電話Sort, searchString = ViewBag.searchString })
+            <a href="@Url.Action("Index", new {
+                    sortBy = "電話",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
+            @Html.DisplayNameFor(model => model.電話)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "電話",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th>
-            @*@Html.DisplayNameFor(model => model.客戶資料.客戶名稱)*@
-            @Html.ActionLink("客戶名稱", "Index", new { sortOrder = ViewBag.客戶名稱Sort, searchString = ViewBag.searchString })
+            <a href="@Url.Action("Index", new {
+                    sortBy = "客戶資料.客戶名稱",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
+            @Html.DisplayNameFor(model => model.客戶資料.客戶名稱)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "客戶資料.客戶名稱",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th></th>
     </tr>

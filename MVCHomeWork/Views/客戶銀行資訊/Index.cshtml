@@ -12,28 +12,77 @@
 @using (Html.BeginForm())
 {
     <p class="form-inline">
-        <label>關鍵字：</label>@Html.TextBox("searchString") &ensp; <input type="submit" value="搜尋" class="btn btn-sm btn-info" />
+        <label>關鍵字：</label>@Html.TextBox("keyword")
     </p>
 }
 <table class="table">
     <tr>
         <th>
+            <a href="@Url.Action("Index", new {
+                    sortBy = "銀行名稱",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
             @Html.DisplayNameFor(model => model.銀行名稱)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "銀行名稱",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
+
         </th>
         <th>
+            <a href="@Url.Action("Index", new {
+                    sortBy = "銀行代碼",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
             @Html.DisplayNameFor(model => model.銀行代碼)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "銀行代碼",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th>
+            <a href="@Url.Action("Index", new {
+                    sortBy = "分行代碼",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
             @Html.DisplayNameFor(model => model.分行代碼)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "分行代碼",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th>
+            <a href="@Url.Action("Index", new {
+                    sortBy = "帳戶名稱",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
             @Html.DisplayNameFor(model => model.帳戶名稱)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "帳戶名稱",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th>
+            <a href="@Url.Action("Index", new {
+                    sortBy = "帳戶號碼",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
             @Html.DisplayNameFor(model => model.帳戶號碼)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "帳戶號碼",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th>
+            <a href="@Url.Action("Index", new {
+                    sortBy = "客戶資料.客戶名稱",
+                    sortDirection = "ASC",
+                    keyword = Html.Value("keyword") })">⬆</a>
             @Html.DisplayNameFor(model => model.客戶資料.客戶名稱)
+            <a href="@Url.Action("Index", new {
+                    sortBy = "客戶資料.客戶名稱",
+                    sortDirection = "DESC",
+                    keyword = Html.Value("keyword") })">⬇</a>
         </th>
         <th></th>
     </tr>
